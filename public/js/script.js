@@ -70,7 +70,7 @@ async function fetchWithRetry(url, maxRetries = 4) {
     for (let attempt = 0; attempt <= maxRetries; attempt++) {
         const r = await fetch(url);
         if (r.status !== 429) return r;
-        if (attempt === maxRetries) throw new Error('Rate limit sau ' + maxRetries + ' lan thu');
+        if (attempt === maxRetries) throw new Error('Rate limit sau ' + maxRetries + ' lần thứ');
         await new Promise(res => setTimeout(res, delay));
         delay *= 2; // 0.8s -> 1.6s -> 3.2s -> 6.4s
     }
@@ -261,7 +261,7 @@ function renderSkeleton(n) {
 function renderCards(data) {
     const grid = document.getElementById('grid');
     if (!data.length) {
-        grid.innerHTML = '<p style="color:var(--muted);padding:20px">Khong tim thay tinh nao.</p>';
+        grid.innerHTML = '<p style="color:var(--muted);padding:20px">Không tìm thấy tỉnh nào.</p>';
         return;
     }
 
@@ -294,10 +294,10 @@ function updateStats(data) {
     const maxP = data.find(d => d.temp == Math.max(...temps))?.name || '';
     const minP = data.find(d => d.temp == Math.min(...temps))?.name || '';
     document.getElementById('stats').innerHTML =
-        '<span>📍 <strong>' + data.length + '</strong> tinh thanh</span>' +
-        '<span>🔥 Cao nhat: <strong>' + max + '°C</strong> (' + maxP + ')</span>' +
-        '<span>❄️ Thap nhat: <strong>' + min + '°C</strong> (' + minP + ')</span>' +
-        '<span>📊 Trung binh: <strong>' + avg + '°C</strong></span>';
+        '<span>📍 <strong>' + data.length + '</strong> tỉnh thành</span>' +
+        '<span>🔥 Cao nhất: <strong>' + max + '°C</strong> (' + maxP + ')</span>' +
+        '<span>❄️ Thấp nhất: <strong>' + min + '°C</strong> (' + minP + ')</span>' +
+        '<span>📊 Trung bình: <strong>' + avg + '°C</strong></span>';
 }
 
 function applyFilter() {
