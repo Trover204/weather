@@ -285,20 +285,6 @@ function renderCards(data) {
     }).join('');
 }
 
-function updateStats(data) {
-    if (!data.length) { document.getElementById('stats').innerHTML = ''; return; }
-    const temps = data.map(d => d.temp).filter(t => t !== null);
-    const max = Math.max(...temps).toFixed(1);
-    const min = Math.min(...temps).toFixed(1);
-    const avg = (temps.reduce((a, b) => a + b, 0) / temps.length).toFixed(1);
-    const maxP = data.find(d => d.temp == Math.max(...temps))?.name || '';
-    const minP = data.find(d => d.temp == Math.min(...temps))?.name || '';
-    document.getElementById('stats').innerHTML =
-        '<span>📍 <strong>' + data.length + '</strong> tỉnh thành</span>' +
-        '<span>🔥 Cao nhất: <strong>' + max + '°C</strong> (' + maxP + ')</span>' +
-        '<span>❄️ Thấp nhất: <strong>' + min + '°C</strong> (' + minP + ')</span>' +
-        '<span>📊 Trung bình: <strong>' + avg + '°C</strong></span>';
-}
 
 function applyFilter() {
     const q = document.getElementById('q').value.trim().toLowerCase();
@@ -309,7 +295,7 @@ function applyFilter() {
     else if (sort === 'temp-l') filtered.sort((a, b) => (a.temp ?? 99) - (b.temp ?? 99));
     else filtered.sort((a, b) => a.name.localeCompare(b.name, 'vi'));
     renderCards(filtered);
-    updateStats(filtered);
+  
 }
 
 // ═══════════════════════════════════════════════
