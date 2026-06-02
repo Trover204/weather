@@ -275,7 +275,6 @@ function renderCards(data) {
         return '<div class="card ' + cls + '" style="animation-delay:' + (Math.min(i, 30) * 0.025) + 's"' +
             ' title="' + d.name + ': ' + w.desc + ' - ' + temp + 'C"' +
             ' data-idx="' + i + '" onclick="openModal(window._cardData[' + i + '])">' +
-            '<span class="card-src">12h</span>' +
             '<span class="card-icon">' + w.icon + '</span>' +
             '<div class="card-name">' + d.name + '</div>' +
             '<div class="card-time">' + time + '</div>' +
