@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thời Tiết Việt Nam</title>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="public/css/style.css">
+</head>
+<body>
+
+<header>
+  <div class="logo">🌤 Thời Tiết <em>Việt Nam</em></div>
+  <div class="hdr-right">
+    <div class="status-row">
+      <div class="dot wait" id="d-prov" title="esgoo.net – lấy danh sách tỉnh"></div> Tỉnh thành
+      <div class="dot wait" id="d-weather" title="open-meteo.com – thời tiết"></div> Thời tiết
+    </div>
+    <span id="last-upd"></span>
+  </div>
+</header>
+
+<div class="toolbar">
+  <div class="search-wrap">
+    <span class="ico">🔍</span>
+    <input id="q" type="text" placeholder="Tìm tỉnh thành…" oninput="applyFilter()">
+  </div>
+  <select id="sort" onchange="applyFilter()">
+    <option value="name">Tên A → Z</option>
+    <option value="temp-h">Nóng nhất trước</option>
+    <option value="temp-l">Mát nhất trước</option>
+  </select>
+  <button class="btn btn-refresh" onclick="init()">
+    <span class="spin" id="spin-ico">🔄</span> Làm mới
+  </button>
+</div>
+
+<div class="stats" id="stats"></div>
+
+<div class="legend">
+  <div class="leg"><div class="leg-sq" style="background:var(--hot)"></div> ≥ 35°C – Rất nóng</div>
+  <div class="leg"><div class="leg-sq" style="background:var(--warm)"></div> 30–34°C – Nóng</div>
+  <div class="leg"><div class="leg-sq" style="background:var(--mild)"></div> 20–29°C – Dễ chịu</div>
+  <div class="leg"><div class="leg-sq" style="background:var(--cool)"></div> &lt; 20°C – Mát</div>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<!-- MODAL: 12-hour forecast -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal()">
+  <div class="modal" id="modal" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-header" id="modal-header">
+      <span class="modal-icon" id="modal-icon"></span>
+      <div>
+        <div class="modal-city" id="modal-city"></div>
+        <div class="modal-now" id="modal-now"></div>
+      </div>
+    </div>
+    <div class="modal-subtitle">Dự báo 12 giờ tới</div>
+    <div class="modal-chart" id="modal-chart"></div>
+    <div class="modal-hours" id="modal-hours"></div>
+    <div class="modal-loading" id="modal-loading">
+      <div class="loader-dots"><span></span><span></span><span></span></div>
+      <span>Đang tải dự báo…</span>
+    </div>
+  </div>
+</div>
+
+<footer>
+  Nguồn: <strong>esgoo.net</strong> (tỉnh thành) · <strong>Open-Meteo</strong> (thời tiết, miễn phí, không cần key) · Tự động làm mới mỗi 10 phút
+</footer>
+<script src="public/js/script.js"></script>
+</body>
+</html>
